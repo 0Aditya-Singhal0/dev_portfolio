@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ArrowUpRight, Download, Menu, X } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
+import { ThemeControl } from './ThemeControl'
 
 const navItems = [
   { to: '/projects', label: 'Projects' },
@@ -49,9 +50,12 @@ export function Layout({ children }: { children: ReactNode }) {
             Résumé <Download aria-hidden="true" />
           </a>
         </nav>
-        <button ref={menuButtonRef} className="menu-button" type="button" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-controls="mobile-navigation" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
-          {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
-        </button>
+        <div className="header-controls">
+          <ThemeControl />
+          <button ref={menuButtonRef} className="menu-button" type="button" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-controls="mobile-navigation" aria-expanded={open} onClick={() => setOpen((value) => !value)}>
+            {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+          </button>
+        </div>
         {open ? (
           <nav id="mobile-navigation" className="mobile-nav" aria-label="Mobile navigation">
             {navItems.map((item) => <NavLink key={item.to} to={item.to} onClick={() => setOpen(false)}>{item.label}</NavLink>)}

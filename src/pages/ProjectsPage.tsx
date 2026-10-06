@@ -5,7 +5,7 @@ import { PageIntro } from '../components/PageIntro'
 import { ProjectVisual } from '../components/ProjectVisual'
 import { projects } from '../data/portfolio'
 
-const filters = ['All', 'Systems', 'AI'] as const
+const filters = ['All', ...new Set(projects.map((project) => project.category))] as const
 
 export function ProjectsPage() {
   const [filter, setFilter] = useState<(typeof filters)[number]>('All')
@@ -35,3 +35,5 @@ export function ProjectsPage() {
     </section>
   </>
 }
+
+
